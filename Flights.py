@@ -5,4 +5,5 @@ class Flights:
         self.destino = ""
         self.pasajeros = n
 
-    
+    def get_pasajeros(self):
+        return self.pasajeros
