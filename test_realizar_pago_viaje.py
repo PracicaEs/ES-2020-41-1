@@ -1,7 +1,7 @@
 import unittest
-import Bank
-import User
-import PaymentData
+from Bank import *
+from User import *
+from PaymentData import *
 
 # [V1]Realizar el pago de un viaje (sin considerar errores y sin necesidad de seleccionar el método de pago)
 
