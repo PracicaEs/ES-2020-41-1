@@ -5,3 +5,4 @@ class Flights:
         self.destino = ""
         self.pasajeros = n
 
+    
