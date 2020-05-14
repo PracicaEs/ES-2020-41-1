@@ -1,4 +1,7 @@
 class PaymentData:
 
     def __init__(self):
-        pass
+        self.tipo_tarjeta = ""
+        self.nom_titular = ""
+        self.codigo_seg = None
+        self.importe = None

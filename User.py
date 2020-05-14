@@ -1,6 +1,8 @@
 class User:
 
     def __init__(self):
-        pass
-
-    def numPasajeros(self,n):
+        self.nom = ""
+        self.dni = ""
+        self.dir_postal = None
+        self.telf = None
+        self.mail = ""
