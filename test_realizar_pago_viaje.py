@@ -1,14 +1,18 @@
 import unittest
-import Bank
-import PaymentData
-
+from Bank import *
+from User import *
+from PaymentData import *
 
 # [V1]Realizar el pago de un viaje (sin considerar errores y sin necesidad de seleccionar el método de pago)
 
 class MyTestCase(unittest.TestCase):
     def test_realizar_pago_viaje(self):
+        banco = Bank()
+        usuario = User("Agapito Pelaez Sanchez", "123456789A", 123456789, 123456789, "aaaaaaaaaa@aaaaaaaaaaa.aaa")
+        datos_pago = PaymentData()
 
-        self.assertEqual(True, False)
+        res = banco.do_payment(usuario, datos_pago)
+        self.assertEqual(True, res)
 
 
 if __name__ == '__main__':
