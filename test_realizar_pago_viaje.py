@@ -12,6 +12,7 @@ class MyTestCase(unittest.TestCase):
         datos_pago = PaymentData()
 
         res = banco.do_payment(usuario, datos_pago)
+
         self.assertEqual(True, res)
 
 

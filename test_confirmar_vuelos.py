@@ -7,6 +7,7 @@ from Skyscanner import*
 class TestCase(unittest.TestCase):
     def setupClass(self):
         self.confirm = Skyscanner()
+
     def test_confirm_reserve(self):
         user = User
         flight = Flights
