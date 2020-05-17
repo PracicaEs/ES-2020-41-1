@@ -1,8 +1,6 @@
 import unittest
-from Travel import *
+from src.Travel import *
 
-
-# [V1] Confirmar la reserva de los vuelos seleccionados (sin considerar errores)
 
 class TestCase(unittest.TestCase):
 

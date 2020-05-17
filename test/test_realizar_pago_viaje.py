@@ -1,8 +1,7 @@
 import unittest
-from Bank import *
-from Travel import *
-from User import *
-from PaymentData import *
+from src.Bank import Bank
+from src.PaymentData import PaymentData
+from src.Travel import *
 
 
 class MyTestCase(unittest.TestCase):
@@ -29,6 +28,7 @@ class MyTestCase(unittest.TestCase):
         def do_payment(a: User, b: PaymentData):
             print ("Pago realizado con ", b.tipo_tarjeta)
             return b.tipo_tarjeta
+
         passengers = 2
         destinations = ["BCN", "PEK", "ROM"]
         user = User("A", "1", 2, 3, "a@b.c")

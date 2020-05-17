@@ -1,5 +1,5 @@
 import unittest
-from Travel import *
+from src.Travel import *
 
 
 class MyTestCase(unittest.TestCase):

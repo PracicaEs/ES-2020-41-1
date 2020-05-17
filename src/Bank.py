@@ -1,5 +1,5 @@
-import User
-import PaymentData
+from src.User import *
+from src.PaymentData import *
 
 
 class Bank:

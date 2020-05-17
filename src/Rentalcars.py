@@ -1,5 +1,5 @@
-from . import User
-from . import Cars
+from src.User import *
+from src.Cars import *
 
 
 class Rentalcars():

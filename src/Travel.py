@@ -1,5 +1,6 @@
-from Skyscanner import *
-from random import *
+from src.Skyscanner import *
+from src.Flights import *
+from src.Flight import *
 
 
 class Travel:

@@ -1,5 +1,5 @@
 import unittest
-from Travel import*
+from src.Travel import *
 
 
 class MyTestCase(unittest.TestCase):
@@ -15,7 +15,7 @@ class MyTestCase(unittest.TestCase):
         destinations = []
         user = User("A", "1", 2, 3, "a@b.c")
         t1 = Travel(destinations, user, passengers)
-        self.assertEqual([], t1.get_flights())
+        self.assertEqual([], t1.get_flights_list())
 
     def test_add_destinations(self):
         passengers = 2
@@ -32,7 +32,7 @@ class MyTestCase(unittest.TestCase):
         t1 = Travel(destinations, user, passengers)
         t1.add_destination("BCN")
         returned_destinations = []
-        for flight in t1.get_flights():
+        for flight in t1.get_flights_list():
             returned_destinations.append(flight.get_destination())
         self.assertEqual(destinations, returned_destinations)
 
@@ -54,7 +54,7 @@ class MyTestCase(unittest.TestCase):
         t1.remove_destination("BCN")
         expected_destinations = ["PEK", "ROM"]
         returned_destinations = []
-        for flight in t1.get_flights():
+        for flight in t1.get_flights_list():
             returned_destinations.append(flight.get_destination())
         self.assertEqual(expected_destinations, returned_destinations)
 

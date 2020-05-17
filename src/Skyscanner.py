@@ -1,5 +1,5 @@
-from User import *
-from Flights import *
+from src.User import *
+from src.Flights import *
 
 
 class Skyscanner():
