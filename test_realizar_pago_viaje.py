@@ -14,11 +14,12 @@ class MyTestCase(unittest.TestCase):
         payment_data = PaymentData()
         res = bank.do_payment(user, payment_data)
         self.assertEqual(True, res)
-        print("Pago realizado con éxito")
+
 
 
     def test_error_payment(self):
         def do_payment(a: User, b: PaymentData):
+            print("Error al realizar el pago")
             return False
 
         bank = Bank()
@@ -27,7 +28,7 @@ class MyTestCase(unittest.TestCase):
         payment_data = PaymentData()
         res = bank.do_payment(user, payment_data)
         self.assertEqual(False, res)
-        print("Error al realizar el pago")
+
 
 
 if __name__ == '__main__':

@@ -8,4 +8,5 @@ class Bank:
         pass
 
     def do_payment(self, user: User, payment_data: PaymentData):
+        print("Pago realizado con éxito")
         return True
