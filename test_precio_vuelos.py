@@ -62,5 +62,6 @@ class MyTestCase(unittest.TestCase):
         calculated_price = f3.get_total_price()
         self.assertEqual(calculated_price, expected_price)
 
+
 if __name__ == '__main__':
     unittest.main()

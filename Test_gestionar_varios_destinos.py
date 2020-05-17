@@ -17,8 +17,8 @@ class MyTestCase(unittest.TestCase):
         destinations.append(s2)
         destinations.append(s3)
         destinations_list = Skyscanner(destinations, n)
-        num_destinations = destinations_list.get_num_destinnations()
-        travels = destinations_list.get_destinnations()
+        num_destinations = destinations_list.get_num_destinations()
+        travels = destinations_list.get_destinations()
         self.assertEqual(n, num_destinations)
         self.assertEqual(destinations, travels)
 

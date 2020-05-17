@@ -7,10 +7,10 @@ class Skyscanner():
         self.num_destination = num_destination
         self.destination = destination
 
-    def get_num_destinnations(self) -> int:
+    def get_num_destinations(self) -> int:
         return self.num_destination
 
-    def get_destinnations(self) -> list:
+    def get_destinations(self) -> list:
         return self.destination
 
     def confirm_reserve(self, user: User, flights: Flights) -> bool:

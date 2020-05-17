@@ -6,5 +6,5 @@ class PaymentData:
         self.codigo_seg = None
         self.importe = None
 
-    def get_paymentdata(self):
+    def get_payment_data(self):
         return self.importe
