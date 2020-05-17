@@ -1,14 +1,13 @@
 import unittest
-from Flights import *
+from Travel import *
 
 
 class MyTestCase(unittest.TestCase):
     def test_manage_passengers(self):
-        expected_number = 6
-        flight = Flight("1", "A", expected_number, 200.0)
-        f1 = Flights([flight])
-        returned_number = f1.get_passengers(0)
-        self.assertEqual(expected_number, returned_number)
+        passengers = 2
+        user = User("A", "1", 2, 3, "a@b.c")
+        t1 = Travel([], user, passengers)
+        self.assertEqual(passengers, t1.get_passengers())
 
 
 if __name__ == '__main__':
