@@ -27,6 +27,7 @@ class MyTestCase(unittest.TestCase):
 
     def test_gestionar_metodo_pago(self):
         def do_payment(a: User, b: PaymentData):
+            print ("Pago realizado con ", b.tipo_tarjeta)
             return b.tipo_tarjeta
         passengers = 2
         destinations = ["BCN", "PEK", "ROM"]
