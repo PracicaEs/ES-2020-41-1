@@ -3,15 +3,8 @@ from Flights import *
 
 
 class Skyscanner():
-    def __init__(self, destination: list, num_destination: int):
-        self.num_destination = num_destination
-        self.destination = destination
-
-    def get_num_destinations(self) -> int:
-        return self.num_destination
-
-    def get_destinations(self) -> list:
-        return self.destination
+    def __init__(self):
+        pass
 
     def confirm_reserve(self, user: User, flights: Flights) -> bool:
         return True
