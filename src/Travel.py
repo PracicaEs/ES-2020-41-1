@@ -50,10 +50,10 @@ class Travel:
         self.cars.append(car)
         self.recalculate_price()
 
-    def remove_car(self, codi: str ) -> None:
+    def remove_car(self, codi: str) -> None:
         for i, c in enumerate(self.cars.cars):
             if c.codi == codi:
-                pos=i
+                pos = i
         self.cars.remove(pos)
         self.recalculate_price()
 

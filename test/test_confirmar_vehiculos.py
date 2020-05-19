@@ -1,5 +1,7 @@
 import unittest
+from src.Car import *
 from src.Rentalcars import *
+from src.Travel import *
 
 
 class TestCase(unittest.TestCase):
@@ -10,8 +12,13 @@ class TestCase(unittest.TestCase):
         destinations = ["BCN", "LON", "NAP"]
         passengers = 5
         t = Travel(destinations, user, passengers)
-        answer = cars.confirm_reserve(user, t.get_flights())
+        car1 = Car("1111AAAA", "Bugatti", "BCN", 2)
+        car2 = Car("2222BBBB", "Lamborgini", "LON", 5)
+        car3 = Car("3333CCCC", "Ferrari", "NAP", 6)
+        t.cars=[car1,car2,car3]
+        answer = cars.confirm_reserve(user, t.cars)
         self.assertEqual(answer, True)
+        print("La reserva se ha efectuado correctamente")
 
     def test_error_confirm_reserve(self):
         def confirm_reserve(user: User, flights: Flights) -> bool:
@@ -24,22 +31,12 @@ class TestCase(unittest.TestCase):
         destinations = ["BCN", "LON", "NAP"]
         passengers = 5
         t = Travel(destinations, user, passengers)
-        answer = cars.confirm_reserve(user, t.get_flights())
+        car1 = Car("1111AAAA", "Bugatti", "BCN", 2)
+        car2 = Car("2222BBBB", "Lamborgini", "LON", 5)
+        car3 = Car("3333CCCC", "Ferrari", "NAP", 6)
+        t.cars = [car1, car2, car3]
+        answer = cars.confirm_reserve(user, t.cars)
         self.assertEqual(answer, False)
-
-
-    def test_retry_confirm_reserve(self):
-        def confirm_reserve(user: User, flights: Flights) -> bool:
-            print("Error en la confirmación de la reserva")
-            return False
-
-        sky = Skyscanner()
-        sky.confirm_reserve = confirm_reserve
-        user = User("Agapito Pelaez Sanchez", "123456789A", 123456789, 123456789, "aaa@aaa.aaa")
-        destinations = ["BCN", "ROM", "PEK"]
-        passengers = 3
-        t = Travel(destinations, user, passengers)
-        respuesta = sky.confirm_reserve(user, t.get_flights())
 
 
 

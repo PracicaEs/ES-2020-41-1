@@ -12,6 +12,7 @@ class TestCase(unittest.TestCase):
         t = Travel(destinations, user, passengers)
         answer = sky.confirm_reserve(user, t.flights)
         self.assertEqual(answer, True)
+        print("La reserva se ha efectuado correctamente")
 
     def test_error_confirm_reserve(self):
         def confirm_reserve(user: User, flights: Flights) -> bool:
