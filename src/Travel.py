@@ -5,11 +5,11 @@ from src.Flight import *
 from src.Cars import *
 
 class Travel:
-    def __init__(self, destinations: list, user: User, passengers: int, flights: list, cars: list):
+    def __init__(self, destinations: list, user: User, passengers: int):
         self.destinations = destinations
         self.passengers = passengers
-        self.flights = Flights(list)
-        self.cars = Cars(list)
+        self.flights = Flights([])
+        self.cars = Cars([])
         self.assign_flights()
         self.total_price = 0.0
         self.user = user
