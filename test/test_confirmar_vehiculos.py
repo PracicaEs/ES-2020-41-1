@@ -21,7 +21,7 @@ class TestCase(unittest.TestCase):
         print("La reserva se ha efectuado correctamente")
 
     def test_error_confirm_reserve(self):
-        def confirm_reserve(user: User, flights: Flights) -> bool:
+        def confirm_reserve(user: User, cars: Cars) -> bool:
             print("Error en la confirmación de la reserva")
             return False
 
