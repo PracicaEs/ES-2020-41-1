@@ -6,3 +6,6 @@ class User:
         self.dir_postal = dir_postal
         self.telf = telf
         self.mail = mail
+
+
+
