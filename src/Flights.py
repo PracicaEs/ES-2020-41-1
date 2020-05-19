@@ -1,3 +1,4 @@
+
 class Flights:
 
     def __init__(self, flights: list):

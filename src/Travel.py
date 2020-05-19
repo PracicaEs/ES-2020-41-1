@@ -1,13 +1,15 @@
+from src import Car
 from src.Skyscanner import *
 from src.Flights import *
 from src.Flight import *
-
+from src.Cars import *
 
 class Travel:
-    def __init__(self, destinations: list, user: User, passengers: int):
+    def __init__(self, destinations: list, user: User, passengers: int, flights: list, cars: list):
         self.destinations = destinations
         self.passengers = passengers
-        self.flights = Flights([])
+        self.flights = Flights(list)
+        self.cars = Cars(list)
         self.assign_flights()
         self.total_price = 0.0
         self.user = user
@@ -42,6 +44,17 @@ class Travel:
         for i, flight in enumerate(self.flights.flights):
             if flight.get_destination() == destination:
                 self.flights.flights.pop(i)
+        self.recalculate_price()
+
+    def add_car(self, car: Car) -> None:
+        self.cars.append(car)
+        self.recalculate_price()
+
+    def remove_car(self, codi: str ) -> None:
+        for i, c in enumerate(self.cars.cars):
+            if c.codi == codi:
+                pos=i
+        self.cars.remove(pos)
         self.recalculate_price()
 
     def recalculate_price(self) -> None:

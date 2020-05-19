@@ -10,12 +10,12 @@ class TestCase(unittest.TestCase):
         destinations = ["BCN", "ROM", "PEK"]
         passengers = 3
         t = Travel(destinations, user, passengers)
-        respuesta = sky.confirm_reserve(user, t.get_flights())
-        self.assertEqual(respuesta, True)
+        answer = sky.confirm_reserve(user, t.flights)
+        self.assertEqual(answer, True)
 
     def test_error_confirm_reserve(self):
         def confirm_reserve(user: User, flights: Flights) -> bool:
-            print("Error en la confirmación del pago")
+            print("Error en la confirmación de la reserva")
             return False
 
         sky = Skyscanner()
@@ -24,8 +24,8 @@ class TestCase(unittest.TestCase):
         destinations = ["BCN", "ROM", "PEK"]
         passengers = 3
         t = Travel(destinations, user, passengers)
-        respuesta = sky.confirm_reserve(user, t.get_flights())
-        self.assertEqual(respuesta, False)
+        answer = sky.confirm_reserve(user, t.get_flights())
+        self.assertEqual(answer, False)
 
 
 if __name__ == '__main__':
