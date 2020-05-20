@@ -4,6 +4,20 @@ from src.Travel import *
 
 
 class TestCase(unittest.TestCase):
+    def test_gestionar_vehiculos(self):
+        cars = Rentalcars()
+        user = User("Guillermo Boreal", "333666999A", "08666", 666666666, "ggg@ggg.ggg")
+        destinations = ["BCN", "LON", "NAP"]
+        passengers = 5
+        t = Travel(destinations, user, passengers)
+        car1 = Car("1111AAAA", "Bugatti", "BCN", 2, 1)
+        car2 = Car("2222BBBB", "Lamborgini", "LON", 5, 2)
+        car3 = Car("3333CCCC", "Ferrari", "NAP", 6, 3)
+        t.add_car(car1)
+        t.add_car(car2)
+        t.add_car(car3)
+        expected = [car1, car2, car3]
+        self.assertEqual(t.cars.cars, expected)
 
     def test_confirm_reserve(self):
         cars = Rentalcars()

@@ -26,7 +26,7 @@ class TestCase(unittest.TestCase):
         destinations = ["BCN", "ROM", "PEK"]
         passengers = 3
         t = Travel(destinations, user, passengers)
-        answer = sky.confirm_reserve(user, t.get_flights())
+        answer = sky.confirm_reserve(user, t.flights)
         self.assertEqual(answer, False)
 
 
