@@ -77,7 +77,9 @@ class Travel:
     def recalculate_price(self) -> None:
         price = 0.0
         for flight in self.flights.flights:
-            price += flight.get_price() * flight.get_passengers()
+            price += (flight.get_price() * flight.get_passengers())
         for car in self.cars.cars:
             price += (car.preu_dia * car.dies_reserva)
+        for hotel in self.hotels.hotels:
+            price += (hotel.preu_dia * hotel.num_hab * hotel.dies_reserva)
         self.total_price = price
