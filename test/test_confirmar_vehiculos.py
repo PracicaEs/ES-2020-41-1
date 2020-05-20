@@ -2,6 +2,7 @@ import unittest
 from src.Car import *
 from src.Rentalcars import *
 from src.Travel import *
+from src.User import *
 
 
 class TestCase(unittest.TestCase):
@@ -15,7 +16,7 @@ class TestCase(unittest.TestCase):
         car1 = Car("1111AAAA", "Bugatti", "BCN", 2)
         car2 = Car("2222BBBB", "Lamborgini", "LON", 5)
         car3 = Car("3333CCCC", "Ferrari", "NAP", 6)
-        t.cars=[car1,car2,car3]
+        t.cars = [car1, car2, car3]
         answer = cars.confirm_reserve(user, t.cars)
         self.assertEqual(answer, True)
         print("La reserva se ha efectuado correctamente")

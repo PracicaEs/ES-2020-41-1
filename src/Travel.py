@@ -3,6 +3,7 @@ from src.Skyscanner import *
 from src.Flights import *
 from src.Flight import *
 from src.Cars import *
+from src.Hotels import *
 
 class Travel:
     def __init__(self, destinations: list, user: User, passengers: int):
@@ -10,6 +11,7 @@ class Travel:
         self.passengers = passengers
         self.flights = Flights([])
         self.cars = Cars([])
+        self.hotels = Hotels([])
         self.assign_flights()
         self.total_price = 0.0
         self.user = user
