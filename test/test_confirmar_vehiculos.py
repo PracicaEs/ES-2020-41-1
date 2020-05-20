@@ -8,7 +8,7 @@ class TestCase(unittest.TestCase):
 
     def test_confirm_reserve(self):
         cars = Rentalcars()
-        user = User("Guillermo Boreal", "333666999A", 08666, 666666666, "ggg@ggg.ggg")
+        user = User("Guillermo Boreal", "333666999A", "08666", 666666666, "ggg@ggg.ggg")
         destinations = ["BCN", "LON", "NAP"]
         passengers = 5
         t = Travel(destinations, user, passengers)
@@ -27,7 +27,7 @@ class TestCase(unittest.TestCase):
 
         cars = Rentalcars()
         cars.confirm_reserve = confirm_reserve
-        user = User("Guillermo Boreal", "333666999A", 08666, 666666666, "ggg@ggg.ggg")
+        user = User("Guillermo Boreal", "333666999A", "08666", 666666666, "ggg@ggg.ggg")
         destinations = ["BCN", "LON", "NAP"]
         passengers = 5
         t = Travel(destinations, user, passengers)

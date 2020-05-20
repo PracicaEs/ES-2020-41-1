@@ -47,18 +47,21 @@ class Travel:
         self.recalculate_price()
 
     def add_car(self, car: Car) -> None:
-        self.cars.append(car)
+        self.cars.cars.append(car)
         self.recalculate_price()
 
     def remove_car(self, codi: str) -> None:
+        pos = 0
         for i, c in enumerate(self.cars.cars):
             if c.codi == codi:
                 pos = i
-        self.cars.remove(pos)
+        self.cars.cars.pop(pos)
         self.recalculate_price()
 
     def recalculate_price(self) -> None:
         price = 0.0
         for flight in self.flights.flights:
             price += flight.get_price() * flight.get_passengers()
+        for car in self.cars.cars:
+            price += (car.preu_dia * car.dies_reserva)
         self.total_price = price
