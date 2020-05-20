@@ -4,6 +4,8 @@ from src.Flights import *
 from src.Flight import *
 from src.Cars import *
 from src.Hotels import *
+from src.Hotel import *
+
 
 class Travel:
     def __init__(self, destinations: list, user: User, passengers: int):
@@ -58,6 +60,18 @@ class Travel:
             if c.codi == codi:
                 pos = i
         self.cars.cars.pop(pos)
+        self.recalculate_price()
+
+    def add_hotel(self, hotel: Hotel) -> None:
+        self.hotels.hotels.append(hotel)
+        self.recalculate_price()
+
+    def remove_hotel(self, codi: str) -> None:
+        pos = 0
+        for i, c in enumerate(self.hotels.hotels):
+            if c.codi == codi:
+                pos = i
+        self.hotels.hotels.pop(pos)
         self.recalculate_price()
 
     def recalculate_price(self) -> None:
