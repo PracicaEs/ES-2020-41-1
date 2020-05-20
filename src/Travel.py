@@ -1,8 +1,8 @@
-from src import Car
-from src.Skyscanner import *
+from src.User import *
+from src.Cars import *
+from src.Car import *
 from src.Flights import *
 from src.Flight import *
-from src.Cars import *
 from src.Hotels import *
 from src.Hotel import *
 
