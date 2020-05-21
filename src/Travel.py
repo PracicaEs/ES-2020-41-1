@@ -5,7 +5,8 @@ from src.Flight import *
 from src.Cars import *
 from src.Hotels import *
 from src.Hotel import *
-
+from src.PaymentData import *
+from src.Bank import *
 
 class Travel:
     def __init__(self, destinations: list, user: User, passengers: int):
@@ -83,3 +84,15 @@ class Travel:
         for hotel in self.hotels.hotels:
             price += (hotel.preu_dia * hotel.num_hab * hotel.dies_reserva)
         self.total_price = price
+
+    def confirmar_pago(self, user: User, payment_data: PaymentData):
+        tries = 1
+        valid = False
+        b = Bank()
+        while (valid is False) or (tries <= 3):
+            valid = b.do_payment(user, payment_data)
+            tries += 1
+        if (valid is False):
+            return "Process has failed"
+        else:
+            return "Process has succed"
