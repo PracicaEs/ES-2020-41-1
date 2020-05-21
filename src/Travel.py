@@ -5,7 +5,7 @@ from src.Flights import *
 from src.Flight import *
 from src.Hotels import *
 from src.Hotel import *
-
+from src.Skyscanner import *
 
 class Travel:
     def __init__(self, destinations: list, user: User, passengers: int):
@@ -83,3 +83,23 @@ class Travel:
         for hotel in self.hotels.hotels:
             price += (hotel.preu_dia * hotel.num_hab * hotel.dies_reserva)
         self.total_price = price
+
+    def confirm_reserve(self, sky: Skyscanner) -> str:
+        retries = 0
+        ok = False
+        message = ""
+        while retries < 3 and not ok:
+            retries += 1
+            if sky.confirm_reserve(self.user, self.flights):
+                ok = True
+                message = "La reserva se ha efectuado correctamente"
+        if retries == 3 and ok == False:
+            message = "Error en la confirmación de la reserva"
+        return message
+
+
+
+
+
+
+
