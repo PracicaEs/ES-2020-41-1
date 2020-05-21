@@ -5,7 +5,8 @@ from src.Flights import *
 from src.Flight import *
 from src.Hotels import *
 from src.Hotel import *
-from src.Skyscanner import *
+from src.PaymentData import *
+from src.Bank import *
 
 class Travel:
     def __init__(self, destinations: list, user: User, passengers: int):
@@ -84,22 +85,14 @@ class Travel:
             price += (hotel.preu_dia * hotel.num_hab * hotel.dies_reserva)
         self.total_price = price
 
-    def confirm_reserve(self, sky: Skyscanner) -> str:
-        retries = 0
-        ok = False
-        message = ""
-        while retries < 3 and not ok:
-            retries += 1
-            if sky.confirm_reserve(self.user, self.flights):
-                ok = True
-                message = "La reserva se ha efectuado correctamente"
-        if retries == 3 and ok == False:
-            message = "Error en la confirmación de la reserva"
-        return message
-
-
-
-
-
-
-
+    def confirmar_pago(self, user: User, payment_data: PaymentData):
+        tries = 1
+        valid = False
+        b = Bank()
+        while (valid is False) or (tries <= 3):
+            valid = b.do_payment(user, payment_data)
+            tries += 1
+        if (valid is False):
+            return "Process has failed"
+        else:
+            return "Process has succed"
