@@ -51,7 +51,7 @@ class TestCase(unittest.TestCase):
 
     def test_error_confirm_reserve(self):
         def confirm_reserve(user: User, cars: Cars) -> bool:
-            print("Error en la confirmación de la reserva")
+            print("Error en la confirmación de la reserva de los vuelos")
             return False
 
         cars = Rentalcars()
@@ -69,6 +69,27 @@ class TestCase(unittest.TestCase):
         answer = cars.confirm_reserve(user, t.cars)
         self.assertEqual(answer, False)
 
+    def test_retry_confirm_reserve_hotels_correct(self):
+        cars = Rentalcars()
+        user = User("Kerry", "12345A", "123", 123456789, "abc@abc.abc")
+        destinations = ["BCN", "ROM", "MAD"]
+        passengers = 3
+        t = Travel(destinations, user, passengers)
+        expected = "La reserva de los alojamientos se ha efectuado correctamente"
+        answer = t.confirm_reserve_hotels(cars)
+        self.assertEqual(answer, expected)
 
-if __name__ == '__main__':
-    unittest.main()
+    def test_retry_confirm_reserve_limit_of_retries_overcomed(self):
+        def confirm_reserve(user: User, flights: Flights) -> bool:
+            print("Error en la confirmación de la reserva de los hoteles")
+            return False
+        cars = Rentalcars()
+        cars.confirm_reserve = confirm_reserve
+        user = User("Kerry", "12345A", "123", 123456789, "abc@abc.abc")
+        destinations = ["BCN", "ROM", "MAD"]
+        passengers = 3
+        t = Travel(destinations, user, passengers)
+        expected = "Error en la confirmación de la reserva de los alojamientos"
+        answer = t.confirm_reserve_hotels(cars)
+        self.assertEqual(answer, expected)
+

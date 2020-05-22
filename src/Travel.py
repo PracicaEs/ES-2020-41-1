@@ -8,6 +8,9 @@ from src.Hotel import *
 from src.PaymentData import *
 from src.Skyscanner import *
 from src.Bank import *
+from src.Rentalcars import *
+from src.Booking import *
+
 
 class Travel:
     def __init__(self, destinations: list, user: User, passengers: int):
@@ -86,7 +89,7 @@ class Travel:
             price += (hotel.preu_dia * hotel.num_hab * hotel.dies_reserva)
         self.total_price = price
 
-    def confirm_reserve(self, sky: Skyscanner) -> str:
+    def confirm_reserve_flights(self, sky: Skyscanner) -> str:
         retries = 0
         ok = False
         message = ""
@@ -94,9 +97,35 @@ class Travel:
             retries += 1
             if sky.confirm_reserve(self.user, self.flights):
                 ok = True
-                message = "La reserva se ha efectuado correctamente"
+                message = "La reserva de los vuelos se ha efectuado correctamente"
         if retries == 3 and ok == False:
-            message = "Error en la confirmación de la reserva"
+            message = "Error en la confirmación de la reserva de los vuelos"
+        return message
+
+    def confirm_reserve_cars(self, car: Rentalcars) -> str:
+        retries = 0
+        ok = False
+        message = ""
+        while retries < 3 and not ok:
+            retries += 1
+            if car.confirm_reserve(self.user, self.cars):
+                ok = True
+                message = "La reserva de los vehiculos se ha efectuado correctamente"
+        if retries == 3 and ok == False:
+            message = "Error en la confirmación de la reserva de los vehiculos"
+        return message
+
+    def confirm_reserve_hotels(self, hotel: Booking) -> str:
+        retries = 0
+        ok = False
+        message = ""
+        while retries < 3 and not ok:
+            retries += 1
+            if hotel.confirm_reserve(self.user, self.hotels):
+                ok = True
+                message = "La reserva de los alojamientos se ha efectuado correctamente"
+        if retries == 3 and ok == False:
+            message = "Error en la confirmación de la reserva de los alojamientos"
         return message
 
     def confirmar_pago(self, user: User, payment_data: PaymentData):
