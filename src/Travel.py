@@ -16,7 +16,11 @@ class Travel:
         self.hotels = Hotels([])
         self.assign_flights()
         self.total_price = 0.0
+        self.total_price_destination = 0.0
         self.user = user
+        self.IVA = 0.21
+        self.total_price_no_IVA = 0.0
+        self.IVA_price = 0.0
 
     def assign_flights(self) -> None:
         for i in range(len(self.flights.flights), len(self.destinations)):
@@ -26,19 +30,16 @@ class Travel:
     def add_destination(self, destination: str) -> None:
         self.destinations.append(destination)
         self.assign_flights()
-        self.recalculate_price()
 
     def remove_destination(self, destination: str) -> None:
         self.destinations.remove(destination)
         for i, flight in enumerate(self.flights.flights):
             if flight.destination == destination:
                 self.flights.flights.pop(i)
-        self.recalculate_price()
 
     def add_car(self, car: Car) -> bool:
         if self.passengers <= 4:
             self.cars.cars.append(car)
-            self.recalculate_price()
 
     def remove_car(self, codi: str) -> None:
         pos = 0
@@ -46,12 +47,10 @@ class Travel:
             if c.codi == codi:
                 pos = i
         self.cars.cars.pop(pos)
-        self.recalculate_price()
 
     def add_hotel(self, hotel: Hotel) -> bool:
         if self.passengers <= 3:
             self.hotels.hotels.append(hotel)
-            self.recalculate_price()
 
     def remove_hotel(self, codi: str) -> None:
         pos = 0
@@ -59,17 +58,49 @@ class Travel:
             if c.codi == codi:
                 pos = i
         self.hotels.hotels.pop(pos)
-        self.recalculate_price()
 
-    def recalculate_price(self) -> None:
+    def calculate_price_flights(self, destination):
         price = 0.0
         for flight in self.flights.flights:
-            price += (flight.price * flight.passengers)
+            if flight.destination == destination:
+                price += (flight.price * flight.passengers)
+        return price
+
+    def calculate_price_cars(self, destination):
+        price = 0.0
         for car in self.cars.cars:
-            price += (car.preu_dia * car.dies_reserva)
+            if car.lloc_recollida == destination:
+                price += (car.preu_dia * car.dies_reserva)
+        return price
+
+    def calculate_price_hotels(self, destination):
+        price = 0.0
         for hotel in self.hotels.hotels:
-            price += (hotel.preu_dia * hotel.num_hab * hotel.dies_reserva)
-        self.total_price = price
+            if hotel.ciutat == destination:
+                price += (hotel.preu_total * hotel.dies_reserva)
+        return price
+
+    def calculate_price_destination(self, destination):
+        self.total_price_destination = self.calculate_price_cars(destination) + self.calculate_price_hotels(
+            destination) + self.calculate_price_flights(destination)
+        return self.total_price_destination
+
+    def calculate_total_no_IVA(self):
+        total_price_no_IVA = 0.0
+        for destination in self.destinations:
+            total_price_no_IVA += (self.calculate_price_destination(destination))
+        return total_price_no_IVA
+
+    def IVA_percent(self):
+        return self.IVA
+
+    def calculate_IVA_price(self):
+        self.IVA_price = self.IVA * self.calculate_total_no_IVA()
+        return self.IVA_price
+
+    def calculate_total(self):
+        self.total_price = self.calculate_IVA_price() + self.calculate_total_no_IVA()
+        return self.total_price
 
     def confirm_reserve_flights(self) -> str:
         retries = 0
