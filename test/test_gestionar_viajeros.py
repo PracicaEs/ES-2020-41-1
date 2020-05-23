@@ -7,7 +7,7 @@ class MyTestCase(unittest.TestCase):
         passengers = 2
         user = User("A", "1", 2, 3, "a@b.c")
         t1 = Travel([], user, passengers)
-        self.assertEqual(passengers, t1.get_passengers())
+        self.assertEqual(passengers, t1.passengers)
 
 
 if __name__ == '__main__':

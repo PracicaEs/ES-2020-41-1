@@ -3,77 +3,47 @@ from src.Travel import *
 
 
 class MyTestCase(unittest.TestCase):
+    def setUp(self) -> None:
+        self.user = User("Aitor Tilla", "22222222A", "08666", 666666666, "aaa@aaa.aaa")
+        self.destinations = ["BCN", "MIL", "LON"]
+        self.passengers = 5
+        self.t = Travel(self.destinations, self.user, self.passengers)
+        self.car1 = Car("1212AAAA", "Ferrari", "BCN", 2, 30)
+        self.car2 = Car("1313AAAA", "Bugatti", "MIL", 2, 50)
+        self.hotel1 = Hotel("1A1A1", "BCN Resort", self.passengers, 3, 2, 100)
+        self.hotel2 = Hotel("2A2A2", "MIL Resort", self.passengers, 2, 1, 85)
+
     def test_add_car(self):
-        user = User("Aitor Tilla", "22222222A", "08666", 666666666, "aaa@aaa.aaa")
-        destinations = ["BCN", "MIL", "LON"]
-        passengers = 5
-        t = Travel(destinations, user, passengers)
-        price_car1 = 30
-        dies_reserva = 2
-        car1 = Car("1212AAAA", "Ferrari", "BCN", dies_reserva, price_car1)
-        t.add_car(car1)
-        total_price = (6*passengers)+(price_car1*dies_reserva)
-        self.assertEqual(total_price, t.get_total_price())
+        self.t.add_car(self.car1)
+        total_price = (6*self.passengers)+(self.car1.preu_dia * self.car1.dies_reserva)
+        self.assertEqual(total_price, self.t.total_price)
 
     def test_delete_car(self):
-        user = User("Aitor Tilla", "22222222A", "08666", 666666666, "aaa@aaa.aaa")
-        destinations = ["BCN", "MIL", "LON"]
-        passengers = 5
-        t = Travel(destinations, user, passengers)
-        price_car1 = 30
-        price_car2 = 50
-        dies_reserva = 2
-        car1 = Car("1212AAAA", "Ferrari", "BCN", dies_reserva, price_car1)
-        car2 = Car("1313AAAA", "Bugatti", "MIL", dies_reserva, price_car2)
-        t.add_car(car1)
-        t.add_car(car2)
-        t.remove_car("1212AAAA")
-        total_price = (6*passengers)+(price_car2*dies_reserva)
-        self.assertEqual(total_price, t.get_total_price())
+        self.t.add_car(self.car1)
+        self.t.add_car(self.car2)
+        self.t.remove_car(self.car1.codi)
+        total_price = (6*self.passengers)+(self.car2.preu_dia*self.car2.dies_reserva)
+        self.assertEqual(total_price, self.t.total_price)
 
     def test_add_hotel(self):
-        user = User("Aitor Tilla", "22222222A", "08666", 666666666, "aaa@aaa.aaa")
-        destinations = ["BCN", "MIL", "LON"]
-        passengers = 5
-        habs = 3
-        dias = 2
-        hotel = Hotel("1A1A1","BCN Resort",passengers,habs,dias,100)
-        t = Travel(destinations, user, passengers)
-        t.add_hotel(hotel)
-        total_price = (6*passengers)+(100*habs*dias)
-        self.assertEqual(total_price, t.get_total_price())
+        self.t.add_hotel(self.hotel1)
+        total_price = (6*self.passengers)+(self.hotel1.dies_reserva * self.hotel1.preu_dia * self.hotel1.num_hab)
+        self.assertEqual(total_price, self.t.total_price)
 
     def test_delete_hotel(self):
-        user = User("Aitor Tilla", "22222222A", "08666", 666666666, "aaa@aaa.aaa")
-        destinations = ["BCN", "MIL", "LON"]
-        passengers = 5
-        hotel1 = Hotel("1A1A1", "BCN Resort", passengers, 3, 2, 100)
-        hotel2 = Hotel("2A2A2", "MIL Resort", passengers, 2, 1, 85)
-        t = Travel(destinations, user, passengers)
-        t.add_hotel(hotel1)
-        t.add_hotel(hotel2)
-        t.remove_hotel(hotel1.codi)
-        total_price = (6 * passengers) + (85 * 2 * 1)
-        self.assertEqual(total_price, t.get_total_price())
+        self.t.add_hotel(self.hotel1)
+        self.t.add_hotel(self.hotel2)
+        self.t.remove_hotel(self.hotel1.codi)
+        total_price = (6 * self.passengers) + (self.hotel2.dies_reserva * self.hotel2.preu_dia * self.hotel2.num_hab)
+        self.assertEqual(total_price, self.t.total_price)
 
     def test_all_together(self):
-        user = User("Aitor Tilla", "22222222A", "08666", 666666666, "aaa@aaa.aaa")
-        destinations = ["BCN", "MIL", "LON"]
-        passengers = 5
-        habs = 3
-        dias = 2
-        hotel = Hotel("1A1A1", "BCN Resort", passengers, habs, dias, 100)
-        t = Travel(destinations, user, passengers)
-        t.add_hotel(hotel)
-        price_car1 = 30
-        price_car2 = 50
-        dies_reserva = 2
-        car1 = Car("1212AAAA", "Ferrari", "BCN", dies_reserva, price_car1)
-        car2 = Car("1313AAAA", "Bugatti", "MIL", dies_reserva, price_car2)
-        t.add_car(car1)
-        t.add_car(car2)
-        total_price = (6 * passengers) + (100 * habs * dias)+(price_car1*dies_reserva)+(price_car2*dies_reserva)
-        self.assertEqual(total_price, t.get_total_price())
+        self.t.add_hotel(self.hotel1)
+        self.t.add_car(self.car1)
+        self.t.add_car(self.car2)
+        total_price = (6 * self.passengers) + (self.hotel1.dies_reserva * self.hotel1.preu_dia * self.hotel1.num_hab) \
+                      + (self.car2.preu_dia*self.car2.dies_reserva) +(self.car1.preu_dia * self.car1.dies_reserva)
+        self.assertEqual(total_price, self.t.total_price)
 
 
 if __name__ == '__main__':

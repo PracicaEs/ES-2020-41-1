@@ -1,6 +1,4 @@
 import unittest
-from src.Bank import Bank
-from src.PaymentData import PaymentData
 from src.Travel import *
 
 
