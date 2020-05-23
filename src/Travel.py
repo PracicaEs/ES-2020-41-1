@@ -37,8 +37,8 @@ class Travel:
             if flight.destination == destination:
                 self.flights.flights.pop(i)
 
-    def add_car(self, car: Car) -> bool:
-        if self.passengers <= 4:
+    def add_car(self, car: Car) -> None:
+        if car.ocupants <= 4:
             self.cars.cars.append(car)
 
     def remove_car(self, codi: str) -> None:
@@ -48,8 +48,8 @@ class Travel:
                 pos = i
         self.cars.cars.pop(pos)
 
-    def add_hotel(self, hotel: Hotel) -> bool:
-        if self.passengers <= 3:
+    def add_hotel(self, hotel: Hotel) -> None:
+        if self.passengers/hotel.num_hab <= 3:
             self.hotels.hotels.append(hotel)
 
     def remove_hotel(self, codi: str) -> None:

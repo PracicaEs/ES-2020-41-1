@@ -9,9 +9,9 @@ class TestCase(unittest.TestCase):
         self.destinations = ["BCN", "LON", "NAP"]
         self.passengers = 4
         self.t = Travel(self.destinations, self.user, self.passengers)
-        self.car1 = Car("1111AAAA", "Bugatti", "BCN", 2, 1)
-        self.car2 = Car("2222BBBB", "Lamborghini", "LON", 5, 2)
-        self.car3 = Car("3333CCCC", "Ferrari", "NAP", 6, 3)
+        self.car1 = Car("1111AAAA", "Bugatti", "BCN", 2, 1, 4)
+        self.car2 = Car("2222BBBB", "Lamborghini", "LON", 5, 4, 4)
+        self.car3 = Car("3333CCCC", "Ferrari", "NAP", 6, 3, 4)
         self.t.add_car(self.car1)
         self.t.add_car(self.car2)
         self.t.add_car(self.car3)
@@ -22,18 +22,17 @@ class TestCase(unittest.TestCase):
         self.assertEqual(self.t.cars.cars, expected)
 
     def test_limit_of_passengers_per_vehicle_overcomed(self):
-        self.user = User("Guillermo Boreal", "333666999A", "08666", 666666666, "ggg@ggg.ggg")
-        self.destinations = ["BCN", "LON", "NAP"]
-        self.passengers = 5
-        self.t2 = Travel(self.destinations, self.user, self.passengers)
-        self.car1 = Car("1111AAAA", "Bugatti", "BCN", 2, 1)
-        self.car2 = Car("2222BBBB", "Lamborghini", "LON", 5, 2)
-        self.car3 = Car("3333CCCC", "Ferrari", "NAP", 6, 3)
-        self.t2.add_car(self.car1)
-        self.t2.add_car(self.car2)
-        self.t2.add_car(self.car3)
-        expected = []
-        self.assertEqual(self.t2.cars.cars, expected)
+        self.destinations = ["LON"]
+        passengers = 5
+        t2 = Travel(self.destinations, self.user, passengers)
+        car1 = Car("1111AAAA", "Bugatti", "LON", 2, 1, 5)
+        car2 = Car("2222BBBB", "Lamborghini", "LON", 5, 2, 2)
+        car3 = Car("3333CCCC", "Ferrari", "LON", 6, 3, 3)
+        t2.add_car(car1)
+        t2.add_car(car2)
+        t2.add_car(car3)
+        expected = [car2, car3]
+        self.assertEqual(t2.cars.cars, expected)
 
     def test_remove_vehicles(self):
         self.t.remove_car(self.car2.codi)
