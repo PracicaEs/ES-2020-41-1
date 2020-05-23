@@ -15,8 +15,7 @@ class MyTestCase(unittest.TestCase):
         t.add_hotel(hotel1)
         t.add_hotel(hotel2)
         t.add_hotel(hotel3)
-        t.remove_hotel(hotel3)
-        expected = [hotel1, hotel2]
+        expected = [hotel1, hotel2, hotel3]
         self.assertEqual(expected, t.hotels.hotels)
 
     def test_remove_hotels(self):
@@ -30,7 +29,8 @@ class MyTestCase(unittest.TestCase):
         t.add_hotel(hotel1)
         t.add_hotel(hotel2)
         t.add_hotel(hotel3)
-        expected = [hotel1, hotel2, hotel3]
+        t.remove_hotel(hotel3.codi)
+        expected = [hotel1, hotel2]
         self.assertEqual(expected, t.hotels.hotels)
 
     def test_confirm_reserve(self):
