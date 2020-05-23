@@ -11,7 +11,7 @@ class MyTestCase(unittest.TestCase):
 
     def test_zero_destinations(self):
         expected = 0.0
-        returned = self.t.total_price
+        returned = self.t.calculate_total_no_IVA()
         self.assertEqual(expected, returned)
 
     def test_add_destination_price(self):
@@ -19,7 +19,7 @@ class MyTestCase(unittest.TestCase):
         self.t.add_destination("ROM")
         # 1*1 + 1*2
         expected_price = 6.0
-        calculated_price = self.t.total_price
+        calculated_price = self.t.calculate_total_no_IVA()
         self.assertEqual(expected_price, calculated_price)
 
     def test_remove_destination_price(self):
@@ -30,7 +30,7 @@ class MyTestCase(unittest.TestCase):
         self.t.remove_destination("ROM")
         # 2*1 + 3*2
         expected_price = 8.0
-        calculated_price = self.t.total_price
+        calculated_price = self.t.calculate_total_no_IVA()
         self.assertEqual(expected_price, calculated_price)
 
 

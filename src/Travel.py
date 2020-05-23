@@ -16,7 +16,7 @@ class Travel:
         self.hotels = Hotels([])
         self.assign_flights()
         self.total_price = 0.0
-        self.total_price_destination = 0.0
+        self.total_price_destination = {}
         self.user = user
         self.IVA = 0.21
         self.total_price_no_IVA = 0.0
@@ -81,18 +81,14 @@ class Travel:
         return price
 
     def calculate_price_destination(self, destination):
-        self.total_price_destination = self.calculate_price_cars(destination) + self.calculate_price_hotels(
+        self.total_price_destination[destination] = self.calculate_price_cars(destination) + self.calculate_price_hotels(
             destination) + self.calculate_price_flights(destination)
-        return self.total_price_destination
+        return self.total_price_destination[destination]
 
     def calculate_total_no_IVA(self):
-        total_price_no_IVA = 0.0
         for destination in self.destinations:
-            total_price_no_IVA += (self.calculate_price_destination(destination))
-        return total_price_no_IVA
-
-    def IVA_percent(self):
-        return self.IVA
+            self.total_price_no_IVA += (self.calculate_price_destination(destination))
+        return self.total_price_no_IVA
 
     def calculate_IVA_price(self):
         self.IVA_price = self.IVA * self.calculate_total_no_IVA()
@@ -126,7 +122,7 @@ class Travel:
             if r.confirm_reserve(self.user, self.cars):
                 ok = True
                 message = "La reserva de los vehiculos se ha efectuado correctamente"
-        if retries == 3 and ok == False:
+        if retries == 3 and ok is False:
             message = "No se ha podido realizar la reserva"
         return message
 
@@ -140,7 +136,7 @@ class Travel:
             if hotel.confirm_reserve(self.user, self.hotels):
                 ok = True
                 message = "La reserva de los alojamientos se ha efectuado correctamente"
-        if retries == 3 and ok == False:
+        if retries == 3 and ok is False:
             message = "No se ha podido realizar la reserva"
         return message
 
@@ -151,7 +147,7 @@ class Travel:
         while (valid is False) or (tries <= 3):
             valid = b.do_payment(user, payment_data)
             tries += 1
-        if (valid is False):
+        if valid is False:
             return "Process has failed"
         else:
             return "Process has succeed"
