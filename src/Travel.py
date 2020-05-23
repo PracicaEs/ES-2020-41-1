@@ -40,7 +40,7 @@ class Travel:
 
     def assign_flights(self) -> None:
         for i in range(len(self.flights.flights), len(self.destinations)):
-            f1 = Flight(str(i), self.destinations[i], self.passengers, i+1)
+            f1 = Flight(str(i), self.destinations[i], self.passengers, i + 1)
             self.flights.flights.append(f1)
 
     def add_destination(self, destination: str) -> None:
@@ -139,3 +139,18 @@ class Travel:
             return "Process has failed"
         else:
             return "Process has succed"
+
+    def confirm_data(self, payment_data: PaymentData):
+        correct = True
+        if payment_data.tipo_tarjeta != "VISA" and payment_data.tipo_tarjeta != "MasterCard":
+            correct = False
+        elif payment_data.codigo_seg < 0 or payment_data.codigo_seg > 999:
+            correct = False
+        elif len(payment_data.nom_titular) < 5:
+            correct = False
+
+        if correct:
+            m_correct = "Datos correctos"
+        else:
+            m_correct = "Datos incorrectos"
+        return m_correct
