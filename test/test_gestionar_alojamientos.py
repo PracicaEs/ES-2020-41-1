@@ -19,6 +19,20 @@ class MyTestCase(unittest.TestCase):
         expected = [self.hotel1, self.hotel2, self.hotel3]
         self.assertEqual(expected, self.t.hotels.hotels)
 
+    def test_limit_of_people_per_room_overcomed(self):
+        self.user = User("Kerry", "12345A", "123", 123456789, "abc@abc.abc")
+        self.destinations = ["BCN", "ROM", "MAD"]
+        self.passengers = 4
+        self.t2 = Travel(self.destinations, self.user, self.passengers)
+        self.hotel1 = Hotel("1234", "Vela", self.passengers, 2, 2, 1)
+        self.hotel2 = Hotel("1235", "Vela1", self.passengers, 2, 2, 2)
+        self.hotel3 = Hotel("1236", "Vela2", self.passengers, 2, 2, 3)
+        self.t2.add_hotel(self.hotel1)
+        self.t2.add_hotel(self.hotel2)
+        self.t2.add_hotel(self.hotel3)
+        expected = []
+        self.assertEqual(expected, self.t2.hotels.hotels)
+
     def test_remove_hotels(self):
         self.t.remove_hotel(self.hotel3.codi)
         expected = [self.hotel1, self.hotel2]

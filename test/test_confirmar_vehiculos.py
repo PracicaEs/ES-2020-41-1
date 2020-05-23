@@ -7,7 +7,7 @@ class TestCase(unittest.TestCase):
     def setUp(self) -> None:
         self.user = User("Guillermo Boreal", "333666999A", "08666", 666666666, "ggg@ggg.ggg")
         self.destinations = ["BCN", "LON", "NAP"]
-        self.passengers = 5
+        self.passengers = 4
         self.t = Travel(self.destinations, self.user, self.passengers)
         self.car1 = Car("1111AAAA", "Bugatti", "BCN", 2, 1)
         self.car2 = Car("2222BBBB", "Lamborghini", "LON", 5, 2)
@@ -20,6 +20,20 @@ class TestCase(unittest.TestCase):
     def test_add_vehicles(self):
         expected = [self.car1, self.car2, self.car3]
         self.assertEqual(self.t.cars.cars, expected)
+
+    def test_limit_of_passengers_per_vehicle_overcomed(self):
+        self.user = User("Guillermo Boreal", "333666999A", "08666", 666666666, "ggg@ggg.ggg")
+        self.destinations = ["BCN", "LON", "NAP"]
+        self.passengers = 5
+        self.t2 = Travel(self.destinations, self.user, self.passengers)
+        self.car1 = Car("1111AAAA", "Bugatti", "BCN", 2, 1)
+        self.car2 = Car("2222BBBB", "Lamborghini", "LON", 5, 2)
+        self.car3 = Car("3333CCCC", "Ferrari", "NAP", 6, 3)
+        self.t2.add_car(self.car1)
+        self.t2.add_car(self.car2)
+        self.t2.add_car(self.car3)
+        expected = []
+        self.assertEqual(self.t2.cars.cars, expected)
 
     def test_remove_vehicles(self):
         self.t.remove_car(self.car2.codi)

@@ -35,9 +35,10 @@ class Travel:
                 self.flights.flights.pop(i)
         self.recalculate_price()
 
-    def add_car(self, car: Car) -> None:
-        self.cars.cars.append(car)
-        self.recalculate_price()
+    def add_car(self, car: Car) -> bool:
+        if self.passengers <= 4:
+            self.cars.cars.append(car)
+            self.recalculate_price()
 
     def remove_car(self, codi: str) -> None:
         pos = 0
@@ -47,9 +48,10 @@ class Travel:
         self.cars.cars.pop(pos)
         self.recalculate_price()
 
-    def add_hotel(self, hotel: Hotel) -> None:
-        self.hotels.hotels.append(hotel)
-        self.recalculate_price()
+    def add_hotel(self, hotel: Hotel) -> bool:
+        if self.passengers <= 3:
+            self.hotels.hotels.append(hotel)
+            self.recalculate_price()
 
     def remove_hotel(self, codi: str) -> None:
         pos = 0
